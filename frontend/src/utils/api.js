@@ -14,4 +14,9 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// Add these payment-specific API functions
+api.getStripeConfig = () => api.get('/api/payments/config/');
+api.createPaymentIntent = (data) => api.post('/api/payments/create-payment-intent/', data);
+api.confirmPayment = (paymentId) => api.post(`/api/payments/confirm-payment/${paymentId}/`);
+
 export default api;
