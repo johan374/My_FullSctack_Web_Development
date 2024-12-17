@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../api";
+import api from "../utils/api";
 import Note from "../components/Note";
 // Import additional components and assets
 import Single from "../assets/single.png";
