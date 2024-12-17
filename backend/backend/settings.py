@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-b0j7wk+lfjt+n9u)8!oqm4(bcf_+xsv!mmrznxp5x=zeyv#_-9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*'] #new featuree *
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1'] #new featuree *
 
 #new code
 REST_FRAMEWORK = {
