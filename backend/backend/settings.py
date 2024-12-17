@@ -38,7 +38,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'my-fullsctack-web.onrender.com',
-    'your-frontend-url.render.com',
+    'my-fullsctack-web-frontend.onrender.com',
 ] #new featuree *
 
 #new code
@@ -205,7 +205,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True   # This allows any domain to access your API, which is useful in development but should be restricted in production to ensure security.
 
 CORS_ALLOWED_ORIGINS = [
-    "https://your-frontend-url.render.com",  # Replace with your frontend URL
+    "my-fullsctack-web-frontend.onrender.com",  # Replace with your frontend URL
 ]
 
 # Allowing credentials (cookies, HTTP authentication, etc.) to be included in cross-origin requests
