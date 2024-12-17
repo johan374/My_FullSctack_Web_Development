@@ -36,7 +36,10 @@ SECRET_KEY = 'django-insecure-b0j7wk+lfjt+n9u)8!oqm4(bcf_+xsv!mmrznxp5x=zeyv#_-9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1'] #new featuree *
+ALLOWED_HOSTS = [
+    'my-fullsctack-web.onrender.com',
+    'your-frontend-url.render.com',
+] #new featuree *
 
 #new code
 REST_FRAMEWORK = {
@@ -200,6 +203,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Allowing all origins (domains) to make cross-origin requests to the API
 CORS_ALLOW_ALL_ORIGINS = True   # This allows any domain to access your API, which is useful in development but should be restricted in production to ensure security.
+
+CORS_ALLOWED_ORIGINS = [
+    "https://your-frontend-url.render.com",  # Replace with your frontend URL
+]
 
 # Allowing credentials (cookies, HTTP authentication, etc.) to be included in cross-origin requests
 CORS_ALLOW_ALL_CREDENTIALS = True   # This allows requests to include credentials (e.g., cookies, HTTP authentication), which can be necessary for maintaining user sessions across different domains.
