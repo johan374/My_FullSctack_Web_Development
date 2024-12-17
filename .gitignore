@@ -5,7 +5,7 @@ __pycache__/
 .Python
 env/
 venv/
-.env
+*.env        # Catch all .env files
 db.sqlite3
 staticfiles/
 
@@ -20,10 +20,17 @@ dist/
 
 # Local development
 *.log
+.env*        # Catch all .env variants
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+# Database
+postgres_data/
+
 # Personal notes
 notes.txt
+
+# Docker
+.docker/
