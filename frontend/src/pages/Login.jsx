@@ -1,6 +1,6 @@
 // Import necessary hooks and components
 import { useState } from "react";              // Hook for managing state in React
-import api from "../api";                      // Custom API module for HTTP requests
+import api from '../utils/api'                     // Custom API module for HTTP requests
 import { useNavigate } from "react-router-dom"; // Hook for navigation
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants"; // Constants for token storage
 import LoadingIndicator from "../components/LoadingIndicator"; // Loading spinner component
