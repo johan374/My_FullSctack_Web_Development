@@ -4,6 +4,7 @@ import api from "../utils/api";                      // Custom API module for ma
 import { useNavigate } from "react-router-dom"; // Hook for programmatic navigation
 import LoadingIndicator from "../components/LoadingIndicator"; // Loading spinner component
 import "../styles/Form.css"                    // Import CSS styles for the form
+import { Link } from 'react-router-dom';
 
 function Register() {
     // State declarations using useState hook
@@ -96,10 +97,10 @@ function Register() {
               {loading ? "Loading..." : "Register"}
           </button>
   
-          {/* Link to login page */}
-          <div className="form-footer">
-              Already have an account? <a href="/login">Login here</a>
-          </div>
+        {/* Link to login page */}
+        <div className="form-footer">
+        Already have an account? <Link to="/login">Login here</Link>
+        </div>
       </form>
   );
 }

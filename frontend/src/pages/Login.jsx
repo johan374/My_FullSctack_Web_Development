@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"; // Hook for navigation
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../utils/constants"; // Constants for token storage
 import LoadingIndicator from "../components/LoadingIndicator"; // Loading spinner component
 import "../styles/Form.css"                    // Import form styles
+import { Link } from 'react-router-dom';
 
 function Login() {
     // State declarations using useState hook
@@ -89,7 +90,7 @@ function Login() {
     
             {/* Registration link */}
             <div className="form-footer">
-                Don't have an account? <a href="/register">Create an account</a>
+                Don't have an account? <Link to="/register">Create an account</Link>
             </div>
         </form>
     );
