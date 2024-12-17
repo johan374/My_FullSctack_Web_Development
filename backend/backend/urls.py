@@ -3,6 +3,19 @@ from django.urls import path, include  # Import the 'path' and 'include' functio
 from api.views import CreateUserView  # Import the 'CreateUserView' class from your 'api' app views
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView  # Import views for handling JWT authentication
 
+# in backend/backend/urls.py
+from django.http import JsonResponse
+
+def api_root(request):
+    return JsonResponse({
+        "message": "Welcome to My Web API",
+        "endpoints": {
+            "notes": "/api/notes/",
+            "auth": "/api/token/",
+            "payments": "/api/payments/config/"
+        }
+    })
+
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin interface route: Accessible at /admin/
     path('api/user/register/', CreateUserView.as_view(), name="register"),  # Register new user route: Accessible at /api/user/register/
@@ -11,4 +24,5 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls")),  # API authentication routes: Include default routes for browsable API authentication
     path("api/", include("api.urls")),
     path('api/payments/', include('payments.urls')),  # Changed this line
+    path('', api_root, name='api-root'),  # Add this line
 ]
