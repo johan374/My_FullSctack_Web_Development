@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.env
+db.sqlite3
+
+# Node
+node_modules/
+dist/
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Local development
+*.log
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Personal notes
+notes.txt

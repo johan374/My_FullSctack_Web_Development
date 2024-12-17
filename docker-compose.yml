@@ -1,0 +1,51 @@
+services:
+  # Backend service (Python/Django)
+  web:
+    image: python:3.9                    # Use Python 3.9 base image
+    working_dir: /app                    # Set working directory inside container
+    command: sh -c "pip install -r requirements.txt && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+                                        # Install dependencies, run migrations, start Django server
+    volumes:
+      - ./backend:/app                   # Mount local backend code into container
+    ports:
+      - "8000:8000"                     # Map container port 8000 to host port 8000
+    environment:                         # Database connection environment variables
+      - DB_NAME=my_db
+      - DB_USER=postgres
+      - DB_PASSWORD=12345
+      - DB_HOST=db                       # Reference to the db service
+      - DB_PORT=5432
+    depends_on:
+      - db                              # Ensure database starts first
+
+  # Frontend service (React/Vite)
+  frontend:
+    image: node:20-alpine               # Use lightweight Node.js image
+    working_dir: /app                   # Set working directory inside container
+    command: sh -c "npm install && npm run dev"
+                                       # Install dependencies and start Vite dev server
+    ports:
+      - "5173:5173"                    # Map Vite's default port
+    volumes:
+      - ./frontend:/app                # Mount local frontend code into container
+      - /app/node_modules             # Anonymous volume for node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000  # Backend API URL for frontend
+    depends_on:
+      - web                           # Ensure backend starts first
+
+  # Database service (PostgreSQL)
+  db:
+    image: postgres:13                 # Use PostgreSQL 13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistent database storage
+    environment:                       # Database configuration
+      - POSTGRES_DB=my_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+    ports:
+      - "5432:5432"                   # Map database port
+
+# Named volumes definition
+volumes:
+  postgres_data:                      # Persistent volume for database data
