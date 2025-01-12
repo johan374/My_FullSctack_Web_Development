@@ -1,7 +1,6 @@
 # Importing the User model from Django's built-in auth system and the serializers module from DRF
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Note
 
 # Define a custom serializer class for the User model
 # Inheriting from `serializers.ModelSerializer` to automatically generate a serializer for the User model
@@ -59,19 +58,4 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(str(e))
 
 
-    
-# Define the NoteSerializer class that will serialize the Note model
-class NoteSerializer(serializers.ModelSerializer):
-    class Meta:
-        # This tells the serializer which model it will work with. In this case, it's the `Note` model.
-        model = Note
-        
-        # Specifies the list of fields that should be included when the model is serialized.
-        # These fields will be converted to JSON when the serializer is used.
-        fields = ["id", "title", "content", "create_at", "author"]
-        
-        # `extra_kwargs` allows additional configurations for certain fields.
-        # In this case, we're making the 'author' field read-only.
-        # This means the 'author' field will be automatically set when creating or updating a note 
-        # and won't be editable by the user through the API.
-        extra_kwargs = {"author": {"read_only": True}}
+ 

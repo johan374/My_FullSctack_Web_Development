@@ -1,25 +1,21 @@
 import axios from 'axios';
 import { ACCESS_TOKEN } from './constants';
 
-// Create axios instance with base configuration
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
     headers: {
         'Content-Type': 'application/json',
     },
-    timeout: 15000, // 15 second timeout
+    timeout: 15000,
 });
 
-// Payment-related API endpoints
 const paymentEndpoints = {
     getStripeConfig: () => api.get('/api/payments/config/'),
     createPaymentIntent: (data) => api.post('/api/payments/create-payment-intent/', data),
     confirmPayment: (paymentId) => api.post(`/api/payments/confirm-payment/${paymentId}/`),
 };
 
-// Assign payment methods to api object
-Object.assign(api, paymentEndpoints);
-
+Object.assign(api, {...paymentEndpoints});
 // Request Interceptor
 api.interceptors.request.use(
     (config) => {

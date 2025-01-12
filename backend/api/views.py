@@ -6,11 +6,10 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .serializers import UserSerializer, NoteSerializer
-from .models import Note
+from .serializers import UserSerializer
 from django.utils import timezone
 from datetime import timedelta
-from .models import Note, RememberMeToken  # Update this line to include RememberMeToken
+from .models import RememberMeToken  # Update this line to include RememberMeToken
 
 # Authentication Classes
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -120,59 +119,3 @@ class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
-
-# Note Management Views
-class NoteListCreate(generics.ListCreateAPIView):
-    """List and create notes for authenticated users"""
-    serializer_class = NoteSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        """Return only notes belonging to the current user"""
-        return Note.objects.filter(author=self.request.user)
-
-    def perform_create(self, serializer):
-        """Create a new note, setting the current user as author"""
-        try:
-            serializer.save(author=self.request.user)
-        except Exception as e:
-            raise serializers.ValidationError(str(e))
-
-    def create(self, request, *args, **kwargs):
-        """Override create to provide better error responses"""
-        try:
-            response = super().create(request, *args, **kwargs)
-            return Response({
-                'success': True,
-                'message': 'Note created successfully',
-                'data': response.data
-            }, status=status.HTTP_201_CREATED)
-        except Exception as e:
-            return Response({
-                'success': False,
-                'error': str(e)
-            }, status=status.HTTP_400_BAD_REQUEST)
-
-
-class NoteDelete(generics.DestroyAPIView):
-    """Delete a specific note"""
-    serializer_class = NoteSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        """Return only notes belonging to the current user"""
-        return Note.objects.filter(author=self.request.user)
-
-    def destroy(self, request, *args, **kwargs):
-        """Override destroy to provide better error responses"""
-        try:
-            response = super().destroy(request, *args, **kwargs)
-            return Response({
-                'success': True,
-                'message': 'Note deleted successfully'
-            }, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({
-                'success': False,
-                'error': str(e)
-            }, status=status.HTTP_400_BAD_REQUEST)

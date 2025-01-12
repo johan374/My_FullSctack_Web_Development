@@ -11,7 +11,18 @@ function Home() {
    // Initialize state variables using useState hook
    const [searchQuery, setSearchQuery] = useState(""); // For search input
    const [selectedCategory, setSelectedCategory] = useState("all"); // For category filter
+   const [savedProducts, setSavedProducts] = useState([]); // Track saved/favorited products
    const navigate = useNavigate(); // Hook for programmatic navigation
+
+    // Handler to add a product to saved list
+    const handleSaveProduct = (product) => {
+        setSavedProducts([...savedProducts, product]);
+    };
+
+    // Handler to remove a product from saved list
+    const handleRemoveProduct = (productId) => {
+        setSavedProducts(savedProducts.filter(p => p.id !== productId));
+    };
 
    // Filter products based on search term and selected category
    const filteredProducts = products.filter(product => {
@@ -40,28 +51,29 @@ function Home() {
     const totalResults = filteredProducts.length;
 
    return (
-       // Main container with responsive padding
        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           {/* Welcome section showing username */}
            <WelcomeSection/>
            
-           {/* Search and filter component */}
+           {/* Search and filter component with props */}
            <SearchFilter 
                searchQuery={searchQuery}
                onSearchChange={setSearchQuery}
                categories={categories}
                selectedCategory={selectedCategory}
                onCategoryChange={setSelectedCategory}
-               totalResults = {totalResults}
+               totalResults={totalResults}
            />
 
-           {/* Product grid with responsive columns */}
+           {/* Product grid with responsive layout */}
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                {filteredProducts.map((product) => (
                    <ProductCard 
                        key={product.id}
                        product={product}
                        onBuy={handlePayment}
+                       onSave={handleSaveProduct}
+                       onRemove={handleRemoveProduct}
+                       isSaved={savedProducts.some(p => p.id === product.id)} // Check if product is saved
                    />
                ))}
            </div>

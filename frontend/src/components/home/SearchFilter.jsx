@@ -39,7 +39,6 @@ const SearchFilter = ({
                         - absolute positioning relative to container
                         - positioned to the left of the input */}
                     <Search className="absolute left-3 top-2.5 text-gray-400" size={20} />
-                    <Search className="absolute left-3 top-2.5 text-gray-400" size={20} />
                     
                     
                 </div>

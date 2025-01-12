@@ -73,14 +73,15 @@ Full Stack Developer with experience in Python/Django and React ecosystems. Pass
   - Project organization with categories
   - Drag-and-drop task management
   - Progress tracking dashboard
-- **Live Demo**: [Link]()
-- **Repository**: [Link]()
+- **Live Demo**: [Link](https://my-fullsctack-web-frontend.onrender.com)
+- **Repository**: [Link](https://github.com/johan374/My_FullSctack_Web)
 
-### [Project Name 2]
-[Similar structure as above]
+## [project 2]
+### [E-commerce web store]
+[Coming soon]
 
 ## 📫 Contact
-- LinkedIn: [Your Profile](www.linkedin.com/in/johanisidro)
+- LinkedIn: [johan isidro](www.linkedin.com/in/johanisidro)
 - GitHub: [Johan374](https://github.com/johan374)
 - Email: [johanbenoit12@gmail.com]
 
